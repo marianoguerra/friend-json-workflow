@@ -6,7 +6,15 @@ Adds support for json session workflow to cemerick's friend library
 Usage
 -----
 
-::
+see clojares page for install instructions:
+
+https://clojars.org/org.marianoguerra/friend-json-workflow
+
+see here for a complete example using immutant:
+
+https://github.com/marianoguerra/immutant-recipes/tree/master/friend-json-auth
+
+the pieces you need to add it to your app are::
 
         (ns myns.api
           (:use [ring.middleware params keyword-params nested-params])
@@ -29,8 +37,14 @@ Usage
                                :workflows [(json-auth/json-login
                                              :login-uri "/myapp/api/session"
                                              :login-failure-handler json-auth/login-failed
-                                             :credential-fn (partial creds/bcrypt-credential-fn l/get-user-by-username))]})
+                                             :credential-fn (partial creds/bcrypt-credential-fn logic/get-user-by-username))]})
                             (ring-session/wrap-session)))
+
+you will have to implement logic/get-user-by-username in the example above
+
+*POST /myapp/api/session* with a json body with the credentias will do the login
+*DELETE /myapp/api/session* will logout
+*GET /myapp/api/session* will return current credentials
 
 License
 -------
