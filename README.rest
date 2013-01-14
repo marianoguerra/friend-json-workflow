@@ -1,0 +1,40 @@
+friend-json-workflow
+====================
+
+Adds support for json session workflow to cemerick's friend library
+
+Usage
+-----
+
+::
+
+        (ns myns.api
+          (:use [ring.middleware params keyword-params nested-params])
+
+          (:require
+            [cemerick.friend :as friend]
+            (cemerick.friend [credentials :as creds])
+            [ring.middleware.session :as ring-session]
+            [marianoguerra.friend-json-workflow :as json-auth]))
+
+        (def api-handler (-> my-api
+                             wrap-keyword-params
+                             wrap-nested-params
+                             wrap-params))
+
+        (def secure-app (-> api-handler
+                            (friend/authenticate
+                              {:login-uri "/myapp/api/session"
+                               :unauthorized-handler json-auth/unauthorized-handler
+                               :workflows [(json-auth/json-login
+                                             :login-uri "/myapp/api/session"
+                                             :login-failure-handler json-auth/login-failed
+                                             :credential-fn (partial creds/bcrypt-credential-fn l/get-user-by-username))]})
+                            (ring-session/wrap-session)))
+
+License
+-------
+
+Copyright © 2013 marianoguerra
+
+Distributed under the Eclipse Public License, the same as Clojure.
