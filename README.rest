@@ -1,7 +1,7 @@
 friend-json-workflow
 ====================
 
-Adds support for json session workflow to cemerick's `friend library <https://github.com/cemerick/friend>`
+Adds support for json session workflow to cemerick's `friend library <https://github.com/cemerick/friend>`_
 
 Usage
 -----
@@ -10,7 +10,7 @@ see clojars page for install instructions:
 
 https://clojars.org/org.marianoguerra/friend-json-workflow
 
-see here for a complete example using `immutant <http://immutant.org/>`:
+see here for a complete example using `immutant <http://immutant.org/>`_:
 
 https://github.com/marianoguerra/immutant-recipes/tree/master/friend-json-auth
 
