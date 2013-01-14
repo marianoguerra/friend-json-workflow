@@ -1,16 +1,16 @@
 friend-json-workflow
 ====================
 
-Adds support for json session workflow to cemerick's friend library
+Adds support for json session workflow to cemerick's `friend library <https://github.com/cemerick/friend>`
 
 Usage
 -----
 
-see clojares page for install instructions:
+see clojars page for install instructions:
 
 https://clojars.org/org.marianoguerra/friend-json-workflow
 
-see here for a complete example using immutant:
+see here for a complete example using `immutant <http://immutant.org/>`:
 
 https://github.com/marianoguerra/immutant-recipes/tree/master/friend-json-auth
 
@@ -42,9 +42,9 @@ the pieces you need to add it to your app are::
 
 you will have to implement logic/get-user-by-username in the example above
 
-*POST /myapp/api/session* with a json body with the credentias will do the login
-*DELETE /myapp/api/session* will logout
-*GET /myapp/api/session* will return current credentials
+* *POST /myapp/api/session* with a json body with the credentias will do the login
+* *DELETE /myapp/api/session* will logout
+* *GET /myapp/api/session* will return current credentials
 
 License
 -------
