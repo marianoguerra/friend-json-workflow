@@ -49,23 +49,20 @@
   (fn [{:keys [uri request-method body] :as request}]
     (when (and (= (gets :login-uri form-config (::friend/auth-config request)) uri)
                (= :post request-method))
-      (let [body-content (slurp body)
-            body-again (java.io.ByteArrayInputStream. (.getBytes body-content))
-            {:keys [username password] :as creds} (json/read-json body-content)
-            fresh-request (assoc request :body body-again)]
+      (let [{:keys [username password] :as creds} (json/read-json (slurp body))]
         (if-let [user-record (and username password
                                   ((gets :credential-fn form-config
-                                         (::friend/auth-config fresh-request))
+                                         (::friend/auth-config request))
                                    (with-meta creds {::friend/workflow :json-login})))]
           (workflows/make-auth user-record
                                {::friend/workflow :json-login
                                 ::friend/redirect-on-auth? false})
 
           ((or (gets :login-failure-handler form-config
-                     (::friend/auth-config fresh-request))
+                     (::friend/auth-config request))
                #'login-failed)
 
-           (update-in fresh-request [::friend/auth-config] merge form-config)))))))
+           (update-in request [::friend/auth-config] merge form-config)))))))
 
 (defn wrap-require-authenticated [handler]
   "utility to require user to be authenticated to access the endpoint"

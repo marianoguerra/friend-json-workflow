@@ -1,4 +1,4 @@
-(defproject org.marianoguerra/friend-json-workflow "0.1.0"
+(defproject org.marianoguerra/friend-json-workflow "0.2.0-SNAPSHOT"
   :description "json auth workflow for cemerick/friend"
   :url "http://github.com/marianoguerra/friend-json-workflow"
   :license {:name "Eclipse Public License"
